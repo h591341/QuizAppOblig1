@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -36,6 +37,11 @@ public class QuizActivity extends AppCompatActivity {
         Button btn2 = findViewById(R.id.alt2);
         Button btn3 = findViewById(R.id.alt3);
 
+        btn1.setOnClickListener((View.OnClickListener) this);
+        btn2.setOnClickListener((View.OnClickListener) this);
+        btn3.setOnClickListener((View.OnClickListener) this);
+
+
 
 
     }
@@ -43,6 +49,7 @@ public class QuizActivity extends AppCompatActivity {
     public void UserData(Context context) {
         this.context = context;
     }
+
 
     public List<String> getFilenames() {
         String[] fromDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).list();
