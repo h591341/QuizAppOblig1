@@ -1,13 +1,11 @@
 package com.example.quizappoblig1;
 
 
-import android.graphics.Bitmap;
-
 public class Animal {
 
     private String name;
-    private Bitmap image;
-    public Animal(String name, Bitmap image) {
+    private int image;
+    public Animal(String name, int image) {
         this.name = name;
         this.image = image;
     }
@@ -15,7 +13,5 @@ public class Animal {
     public String getName() {
         return this.name;
     }
-    public Bitmap getImage() {
-        return this.image;
-    }
+    public int getImage() { return this.image; }
 }
