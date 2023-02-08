@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+
 public class Database {
 
     protected ArrayList<Animal> list;
@@ -18,6 +19,8 @@ public class Database {
         list.add(new Animal("Fish", BitmapFactory.decodeResource(context.getResources(), R.drawable.fish)));
         list.add(new Animal("Horse", BitmapFactory.decodeResource(context.getResources(), R.drawable.horse)));
     }
+
+    Database obj = new Database();
     private void addEntry(Animal entry) {
         list.add(entry);
     }

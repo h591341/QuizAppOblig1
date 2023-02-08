@@ -14,6 +14,9 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.quizappoblig1.Database;
 
 import java.util.Random;
 
@@ -24,11 +27,23 @@ public class QuizActivity extends AppCompatActivity {
     ImageView image;
     Context context;
     private List<Bitmap> imageList;
+    private List<String> nameList;
+    private List<Bitmap> imagesList;
     Random rnd = new Random();
     Database db = new Database(context);
     Button btn1;
     Button btn2;
     Button btn3;
+
+    int current;
+    Integer score;
+
+    TextView name;
+    TextView result;
+    TextView scoreText;
+    //Context context;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +65,14 @@ public class QuizActivity extends AppCompatActivity {
 
 
     }
-    public void UserData(Context context) {
+
+
+
+   /* public void UserData(Context context) {
         this.context = context;
     }
+
+    */
 
 
     public List<String> getFilenames() {
@@ -65,7 +85,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-    public List<Bitmap> bitmapList() {
+  /*  public List<Bitmap> bitmapList() {
         List<String> imageFiles = getFilenames();
         List<Bitmap> bmList = new ArrayList<>();
         for (String file : imageFiles) {
@@ -88,7 +108,50 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public int getPosition() {
-        return rnd.nextInt(imageList.size());
+        return rnd.nextInt(imagesList.size());
     }
 
+
+    public void guess(View view) {
+        //Viss svaret er rett
+        if (isCorrect(current)) {
+            score += 1;
+            result.setText("Correct");
+
+        }
+        //Viss svaret er feil
+        else {
+            result.setText("Wrong... The correct answer was" + ().get(current));
+        }
+        System.out.println("SCORE" + score);
+        scoreText.setText(score.toString());
+        name.setText("");
+        current = getPosition();
+        setImage(current);
+
+      /*  public void nextQuestion() {
+            db.getNewQuestion();
+        }
+
+       */
+
+    }
+
+
+
+    //returnere et navn som matcha bilde
+
+    public String getNameAtPosition (int position) { return nameList.get(position); }
+
+    // Sette viewet til bilde
+    public void setImage(int position) { image.setImageBitmap(imagesList.get(position)); }
+
+    public boolean isCorrect (int position) {
+        boolean correct = false;
+        String n = name.getText().toString();
+        if (getNameAtPosition(position).equalsIgnoreCase(n)) {
+            correct = true;
+        }
+        return correct;
+    }
 }

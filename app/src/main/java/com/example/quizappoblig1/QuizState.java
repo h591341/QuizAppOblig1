@@ -10,10 +10,10 @@ public class QuizState extends ViewModel {
     protected int guesses;
     protected int points;
 
-//   public void guess() {
-//        if( /* correct TODO */ ) { points++; }
-//            guesses++;
-//    }
+    public void guess() {
+        if( /* correct TODO */ ) { points++; }
+            guesses++;
+    }
 
     public void nextQuestion() {
         db.getNewQuestion();

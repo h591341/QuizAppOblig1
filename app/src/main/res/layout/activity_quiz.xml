@@ -24,7 +24,8 @@
             <Button
                 android:id="@+id/alt1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="guess"/>
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
                 android:id="@+id/alt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:onClick="guess"/>
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
                 android:id="@+id/alt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:onClick="guess"/>
         </TableRow>
     </TableLayout>
 
