@@ -22,8 +22,13 @@ import java.util.Random;
 public class QuizActivity extends AppCompatActivity {
 
     ImageView image;
+    Context context;
     private List<Bitmap> imageList;
     Random rnd = new Random();
+    Database db = new Database(context);
+    Button btn1;
+    Button btn2;
+    Button btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +38,9 @@ public class QuizActivity extends AppCompatActivity {
         //get views
 
         image = findViewById(R.id.image);
-        Button btn1 = findViewById(R.id.alt1);
-        Button btn2 = findViewById(R.id.alt2);
-        Button btn3 = findViewById(R.id.alt3);
+        btn1 = findViewById(R.id.alt1);
+        btn2 = findViewById(R.id.alt2);
+        btn3 = findViewById(R.id.alt3);
 
         btn1.setOnClickListener((View.OnClickListener) this);
         btn2.setOnClickListener((View.OnClickListener) this);
@@ -45,7 +50,6 @@ public class QuizActivity extends AppCompatActivity {
 
 
     }
-    Context context;
     public void UserData(Context context) {
         this.context = context;
     }
@@ -72,6 +76,15 @@ public class QuizActivity extends AppCompatActivity {
             bmList.add(scaled);
         }
         return bmList;
+    }
+
+    public void newQuestion() {
+        ArrayList<Animal> liste = db.getNewQuestion();
+
+        image.setImageBitmap(liste.get(0).getImage());
+        btn1.setText(liste.get(0).getName());
+        btn2.setText(liste.get(1).getName());
+        btn3.setText(liste.get(2).getName());
     }
 
     public int getPosition() {

@@ -12,10 +12,10 @@ public class Animal {
         this.image = image;
     }
 
-    private String getName() {
+    public String getName() {
         return this.name;
     }
-    private Bitmap getImage() {
+    public Bitmap getImage() {
         return this.image;
     }
 }
