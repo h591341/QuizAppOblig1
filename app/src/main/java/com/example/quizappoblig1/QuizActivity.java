@@ -20,7 +20,6 @@ import com.example.quizappoblig1.Database;
 
 import java.util.Random;
 
-//hey ho
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -30,20 +29,15 @@ public class QuizActivity extends AppCompatActivity {
     private List<String> nameList;
     private List<Bitmap> imagesList;
     Random rnd = new Random();
-    Database db = new Database(context);
+    Database db = new Database();
     Button btn1;
     Button btn2;
     Button btn3;
 
-    int current;
-    Integer score;
-
-    TextView name;
-    TextView result;
-    TextView scoreText;
-    //Context context;
-
-
+    Integer score = 0;
+    Integer attempts = 0;
+    int correctInt;
+    TextView scoreText;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +47,29 @@ public class QuizActivity extends AppCompatActivity {
         //get views
 
         image = findViewById(R.id.image);
-        btn1 = findViewById(R.id.alt1);
-        btn2 = findViewById(R.id.alt2);
-        btn3 = findViewById(R.id.alt3);
+        btn1 = findViewById(R.id.alt0);
+        btn2 = findViewById(R.id.alt1);
+        btn3 = findViewById(R.id.alt2);
+        Button btn4 = findViewById(R.id.next);
+        TextView scoreText = findViewById(R.id.score);
 
-        btn1.setOnClickListener((View.OnClickListener) this);
-        btn2.setOnClickListener((View.OnClickListener) this);
-        btn3.setOnClickListener((View.OnClickListener) this);
-
-
-
+        btn1.setOnClickListener(((v) -> {
+            guess(0);
+        }));
+        btn2.setOnClickListener((v) -> {
+            guess(1);
+        });
+        btn3.setOnClickListener((v) -> {
+            guess(2);
+        });
+        btn4.setOnClickListener((v) -> {
+            newQuestion();
+        });
 
     }
 
 
 
-   /* public void UserData(Context context) {
-        this.context = context;
-    }
-
-    */
 
 
     public List<String> getFilenames() {
@@ -85,26 +82,26 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-  /*  public List<Bitmap> bitmapList() {
-        List<String> imageFiles = getFilenames();
-        List<Bitmap> bmList = new ArrayList<>();
-        for (String file : imageFiles) {
-            String path = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/" + file;
-            System.out.println("path: " + path);
-            Bitmap b = BitmapFactory.decodeFile(path);
-            Bitmap scaled = Bitmap.createScaledBitmap(b, 450, 500, true);
-            bmList.add(scaled);
-        }
-        return bmList;
-    }
 
     public void newQuestion() {
         ArrayList<Animal> liste = db.getNewQuestion();
-
-        image.setImageBitmap(liste.get(0).getImage());
-        btn1.setText(liste.get(0).getName());
-        btn2.setText(liste.get(1).getName());
-        btn3.setText(liste.get(2).getName());
+        correctInt = rnd.nextInt(imageList.size());
+        if(correctInt == 0) {
+            image.setImageResource(liste.get(correctInt).getImage());
+            btn1.setText(liste.get(correctInt).getName());
+            btn2.setText(liste.get(1).getName());
+            btn3.setText(liste.get(2).getName());
+        } else if(correctInt == 1 ) {
+            image.setImageResource(liste.get(correctInt).getImage());
+            btn1.setText(liste.get(correctInt).getName());
+            btn2.setText(liste.get(0).getName());
+            btn3.setText(liste.get(2).getName());
+        } else {
+            image.setImageResource(liste.get(correctInt).getImage());
+            btn1.setText(liste.get(correctInt).getName());
+            btn2.setText(liste.get(0).getName());
+            btn3.setText(liste.get(1).getName());
+        }
     }
 
     public int getPosition() {
@@ -112,46 +109,21 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-    public void guess(View view) {
-        //Viss svaret er rett
-        if (isCorrect(current)) {
-            score += 1;
-            result.setText("Correct");
-
+    public void guess(int index) {
+        if (isCorrect(index)) {
+            score++;
         }
-        //Viss svaret er feil
-        else {
-            result.setText("Wrong... The correct answer was" + ().get(current));
-        }
-        System.out.println("SCORE" + score);
-        scoreText.setText(score.toString());
-        name.setText("");
-        current = getPosition();
-        setImage(current);
+        attempts++;
+        updateScore();
+    }
 
-      /*  public void nextQuestion() {
-            db.getNewQuestion();
-        }
-
-       */
+    public void updateScore() {
+        scoreText = findViewById(R.id.score);
+        scoreText.setText("SCORE: " + score + "/" + attempts);
 
     }
 
-
-
-    //returnere et navn som matcha bilde
-
-    public String getNameAtPosition (int position) { return nameList.get(position); }
-
-    // Sette viewet til bilde
-    public void setImage(int position) { image.setImageBitmap(imagesList.get(position)); }
-
     public boolean isCorrect (int position) {
-        boolean correct = false;
-        String n = name.getText().toString();
-        if (getNameAtPosition(position).equalsIgnoreCase(n)) {
-            correct = true;
-        }
-        return correct;
+        return position == correctInt;
     }
 }
