@@ -1,52 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/material_dynamic_tertiary99"
     android:orientation="vertical"
     android:weightSum="1"
     tools:context=".QuizActivity">
+
+    <Button
+        android:id="@+id/alt"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="68dp"
+        android:backgroundTint="#A08CC3"
+        android:text="Next question"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/overskrift"
+        android:layout_width="370dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:text="What kind of animal is this?"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:src="@drawable/doggo" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            <Button
-                android:id="@+id/alt1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="guess"/>
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            <Button
-                android:id="@+id/alt2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="guess"/>
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            <Button
-                android:id="@+id/alt3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="guess"/>
-        </TableRow>
-    </TableLayout>
+        android:layout_width="206dp"
+        android:layout_height="346dp"
+        android:layout_marginBottom="320dp"
+        android:layout_weight="2"
+        android:src="@drawable/doggo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 
-</LinearLayout>
+    <Button
+        android:id="@+id/alt1"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="264dp"
+        android:text="dinosaur"
+        android:textColor="@color/material_dynamic_tertiary30"
+        app:backgroundTint="@color/material_dynamic_neutral95"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />/>
+
+    <Button
+        android:id="@+id/alt3"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="152dp"
+        android:backgroundTint="@color/material_dynamic_neutral95"
+        android:text="DOG"
+        android:textColor="@color/material_dynamic_tertiary30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/alt2"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="208dp"
+        android:backgroundTint="@color/material_dynamic_neutral95"
+        android:text="Fish"
+        android:textColor="@color/material_dynamic_tertiary30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/poeng"
+        android:layout_width="92dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="680dp"
+        android:fontFamily="serif-monospace"
+        android:text="Points: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="58dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="680dp"
+        android:fontFamily="serif-monospace"
+        android:text="0/7"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.711"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
