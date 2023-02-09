@@ -66,7 +66,7 @@
         android:id="@+id/alt1"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="208dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
         android:id="@+id/alt2"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="208dp"
+        android:layout_marginBottom="152dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,13 +88,24 @@
 
 
     <TextView
-        android:id="@+id/Textscore"
+        android:id="@+id/textScore"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="75dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.803"
         app:layout_constraintStart_toStartOf="parent" />
 
 
