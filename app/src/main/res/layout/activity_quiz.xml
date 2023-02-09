@@ -10,7 +10,7 @@
     tools:context=".QuizActivity">
 
     <Button
-        android:id="@+id/alt"
+        android:id="@+id/next"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_marginBottom="68dp"
@@ -51,25 +51,23 @@
 
 
     <Button
-        android:id="@+id/alt1"
+        android:id="@+id/alt0"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_marginBottom="264dp"
-        android:text="dinosaur"
         android:textColor="@color/material_dynamic_tertiary30"
         app:backgroundTint="@color/material_dynamic_neutral95"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent" />/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/alt3"
+        android:id="@+id/alt1"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_marginBottom="152dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
-        android:text="DOG"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,40 +80,22 @@
         android:layout_height="55dp"
         android:layout_marginBottom="208dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
-        android:text="Fish"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/poeng"
-        android:layout_width="92dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="680dp"
-        android:fontFamily="serif-monospace"
-        android:text="Points: "
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/scoreText"
-        android:layout_width="58dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="680dp"
-        android:fontFamily="serif-monospace"
-        android:text="0/7"
+        android:id="@+id/Textscore"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.711"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

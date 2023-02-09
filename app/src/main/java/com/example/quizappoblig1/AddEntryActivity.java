@@ -46,7 +46,11 @@ public class AddEntryActivity extends AppCompatActivity {
             camera.takePicture();
         });
 
-
+        // BRUK MEDIAFILE
+        // FÅ THUMBNAIL OG URI FOR FIL
+        // SPØR OM FIL, HENT DEN
+        // Images.Media
+        // MediaStore.Images.Media... |URI|
 
 
 
