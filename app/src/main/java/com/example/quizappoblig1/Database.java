@@ -3,10 +3,16 @@ package com.example.quizappoblig1;
 import static java.util.Collections.shuffle;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Database {
+public class Database implements Serializable {
 
     protected ArrayList<Animal> list;
 
@@ -18,7 +24,7 @@ public class Database {
                 list.add(new Animal("Horse", R.drawable.horse));
         };
 
-    private void addEntry(Animal entry) {
+    public void addEntry(Animal entry) {
         list.add(entry);
     }
 
@@ -30,4 +36,8 @@ public class Database {
         threeNames.add(this.list.get(2));
         return threeNames;
     }
+    public ArrayList<Animal> getList() {
+        return this.list;
+    }
+
 }
