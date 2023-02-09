@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -38,6 +40,16 @@ public class QuizActivity extends AppCompatActivity {
     TextView scoreText;
     Button correctButton;
 
+    private String difficulty;
+
+
+
+    private ProgressBar progressBar;
+    private int counter;
+
+    private final int DELAY = 3000;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +57,16 @@ public class QuizActivity extends AppCompatActivity {
 
         //get views
         db = new Database();
+
+
+        //If hard mode is activated
+        if (difficulty.equals("hard")) {
+            startInactivityTimer();
+        }
+
+        //må opprette progressbar i XML med id
+        progressBar = findViewById(R.id.progressBar);
+
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
 
@@ -147,6 +169,12 @@ public class QuizActivity extends AppCompatActivity {
             btn2.setBackgroundColor(getResources().getColor(R.color.red));
             btn3.setBackgroundColor(getResources().getColor(R.color.green));
         }
+    }
+
+    //Sjølv timeren som telle ned fra 30 sek.
+    public void startInactivityTimer() {
+        //noke greier her
+        progressBar.setMax(DELAY);
     }
 
     public boolean isCorrect (int position) {
