@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -15,20 +16,21 @@ import android.widget.ImageView;
 
 public class AddEntryActivity extends AppCompatActivity {
 
-    Button imageBtn;
     ImageView imagePreview;
     int select_picture = 200;
+
+    String name;
+    int image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-
+       // Database db = (Database) getIntent().getSerializableExtra("hvl.com.KEY_NAME");
+        //Log.d("SATAN", db.list.get(0).getName());
         Button addPicture = findViewById(R.id.addPicture);
-        addPicture.setOnClickListener(v -> {
-            selectImage();
-        });
+        addPicture.setOnClickListener(v -> selectImage());
 
         imagePreview = findViewById(R.id.imagePreview);
 
@@ -41,13 +43,25 @@ public class AddEntryActivity extends AppCompatActivity {
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-    }
+        Button addEntry = findViewById(R.id.submitEntry);
+      /*
+        addEntry.setOnClickListener((v) -> {
+            if(name != null & image != 0) {
+                try {
+                    db.addEntry(new Animal(name, image));
+                } catch (Exception e) {
+                    Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal'");
+                }
+            }
+        });
+   */ }
     public void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), select_picture);
     }
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {

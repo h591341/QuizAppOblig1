@@ -10,6 +10,7 @@ import java.util.Random;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import android.os.Bundle;
@@ -29,7 +30,6 @@ public class QuizActivity extends AppCompatActivity {
     private List<Bitmap> imageList;
     private List<Bitmap> imagesList;
     Random rnd = new Random();
-    Database db;
     Button btn1;
     Button btn2;
     Button btn3;
@@ -40,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     int correctInt;
     TextView scoreText;
     Button correctButton;
-
+    Database db;
     private String difficulty;
 
 
@@ -56,14 +56,15 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        //get views
+        Intent intent = getIntent();
+        //Didn't get it to work
+        //Database db = (Database) getIntent().getSerializableExtra("KEY_NAME");
         db = new Database();
-
-
+        // Not implementet yet
         //If hard mode is activated
-        if (difficulty.equals("hard")) {
-            startInactivityTimer();
-        }
+        //if (difficulty.equals("hard")) {
+        //    startInactivityTimer();
+        //}
 
         //må opprette progressbar i XML med id
         progressBar = findViewById(R.id.progressBar);
