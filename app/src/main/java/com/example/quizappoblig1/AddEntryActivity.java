@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 
 public class AddEntryActivity extends AppCompatActivity {
 
@@ -21,17 +23,18 @@ public class AddEntryActivity extends AppCompatActivity {
 
     String name;
     int image;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-       // Database db = (Database) getIntent().getSerializableExtra("hvl.com.KEY_NAME");
-        //Log.d("SATAN", db.list.get(0).getName());
+        //ArrayList<Animal> db = getIntent().getParcelableArrayListExtra("dbase", Animal.class);
+        // Log.d("SATAN", db.get(0).getName());
         Button addPicture = findViewById(R.id.addPicture);
         addPicture.setOnClickListener(v -> selectImage());
-
+        db = new Database();
         imagePreview = findViewById(R.id.imagePreview);
 
         // BRUK MEDIAFILE
@@ -44,17 +47,19 @@ public class AddEntryActivity extends AppCompatActivity {
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
         Button addEntry = findViewById(R.id.submitEntry);
-      /*
         addEntry.setOnClickListener((v) -> {
-            if(name != null & image != 0) {
+            if(!pictureText.getText().toString().isEmpty() && imagePreview.getId() != -1) {
                 try {
-                    db.addEntry(new Animal(name, image));
+                    db.addEntry(new Animal(pictureText.getText().toString(), imagePreview.getId()));
                 } catch (Exception e) {
-                    Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal'");
+                    Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal");
                 }
+                Log.d("addEntryM", db.getList().get(4).getName());
+                Log.d("addEntryM", "" + db.getList().size());
             }
-        });
-   */ }
+            });
+
+       }
     public void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
