@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 import java.util.Random;
+import java.util.Timer;
 
 import android.annotation.SuppressLint;
 
@@ -34,7 +35,38 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private Database db;
     private boolean difficulty;
-    private CountDownTimer countDown;
+
+
+
+
+
+        TextView timer;
+
+        CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timer.setText(millisUntilFinished / 1000 + "s");
+            }
+
+            @Override
+            public void onFinish() {
+                attempts++;
+                showAnswers();
+                updateScore();
+
+
+                btn1.setEnabled(false);
+                btn2.setEnabled(false);
+                btn3.setEnabled(false);
+                btn4.setEnabled(true);
+                timer.setText("Time is up!");
+            }
+
+        };
+
+
+
+
 
 
     private final int DELAY = 3000;
@@ -88,6 +120,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
+
+
     public void newQuestion() {
         ArrayList<Animal> liste = db.getNewQuestion();
         correctInt = rnd.nextInt(db.list.size()-1);
@@ -116,15 +150,20 @@ public class QuizActivity extends AppCompatActivity {
         btn1.setEnabled(true);
         btn3.setEnabled(true);
         btn4.setEnabled(false);
-        if(difficulty) { startTimer(); }
+        if(difficulty) { timerObject.start(); }
+
+        timer = (TextView) findViewById(R.id.timer);
+
 
     }
 
 
     public void guess(int index) {
+
         if (isCorrect(index)) {
             score++;
         }
+
         attempts++;
         showAnswers();
         updateScore();
@@ -132,8 +171,13 @@ public class QuizActivity extends AppCompatActivity {
         btn2.setEnabled(false);
         btn3.setEnabled(false);
         btn4.setEnabled(true);
-        if(difficulty) { countDown.cancel(); }
+        if(difficulty) { timerObject.cancel(); }
+
+        timer = (TextView) findViewById(R.id.timer);
+
     }
+
+
 
     private void updateScore() {
         scoreText = findViewById(R.id.textScore);
@@ -157,28 +201,6 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    public void startTimer() {
-        TextView timer = findViewById(R.id.timer);
-        CountDownTimer countdown = new CountDownTimer(10000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timer.setText(millisUntilFinished/1000 + "s");
-            }
-
-            @Override
-            public void onFinish() {
-                attempts++;
-                showAnswers();
-                updateScore();
-                btn1.setEnabled(false);
-                btn2.setEnabled(false);
-                btn3.setEnabled(false);
-                btn4.setEnabled(true);
-                timer.setText("Time is up!");
-            }
-        }.start();
-
-    }
 
     public boolean isCorrect (int position) {
         return position == correctInt;
