@@ -12,12 +12,10 @@ import android.annotation.SuppressLint;
 
 import android.os.Bundle;
 
-
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -36,11 +34,8 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private Database db;
     private boolean difficulty;
+    private CountDownTimer countDown;
 
-
-
-    private ProgressBar progressBar;
-    private int counter;
 
     private final int DELAY = 3000;
 
@@ -58,6 +53,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("db0Name", db.getList().get(0).toString());
         */
         db = new Database();
+        difficulty = getIntent().getBooleanExtra("switch", true);
 
         // Not implementet yet
         //If hard mode is activated
@@ -65,8 +61,6 @@ public class QuizActivity extends AppCompatActivity {
         //    startInactivityTimer();
         //}
 
-        //må opprette progressbar i XML med id
-        progressBar = findViewById(R.id.progressBar);
 
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
@@ -122,6 +116,7 @@ public class QuizActivity extends AppCompatActivity {
         btn1.setEnabled(true);
         btn3.setEnabled(true);
         btn4.setEnabled(false);
+        if(difficulty) { startTimer(); }
 
     }
 
@@ -131,12 +126,13 @@ public class QuizActivity extends AppCompatActivity {
             score++;
         }
         attempts++;
-        showAnswers(index);
+        showAnswers();
         updateScore();
         btn1.setEnabled(false);
         btn2.setEnabled(false);
         btn3.setEnabled(false);
         btn4.setEnabled(true);
+        if(difficulty) { countDown.cancel(); }
     }
 
     private void updateScore() {
@@ -144,7 +140,7 @@ public class QuizActivity extends AppCompatActivity {
         scoreText.setText("Score: "+ score + "/" + attempts);
     }
 
-    private void showAnswers(int index) {
+    private void showAnswers() {
 
         if(correctInt == 0) {
             btn1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -161,30 +157,26 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    //Sjølv timeren som telle ned fra 30 sek.
-    public void startInactivityTimer() {
-        //noke greier her
-        progressBar.setMax(DELAY);
-    }
     public void startTimer() {
         TextView timer = findViewById(R.id.timer);
-        new CountDownTimer(10000, 1000) {
+        CountDownTimer countdown = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timer.setText("Seconds remaining: " + millisUntilFinished + "s");
+                timer.setText(millisUntilFinished/1000 + "s");
             }
 
             @Override
             public void onFinish() {
                 attempts++;
-                showAnswers(correctInt);
+                showAnswers();
                 updateScore();
                 btn1.setEnabled(false);
                 btn2.setEnabled(false);
                 btn3.setEnabled(false);
                 btn4.setEnabled(true);
+                timer.setText("Time is up!");
             }
-        };
+        }.start();
 
     }
 
