@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Database implements Serializable {
+public class Database implements Parcelable {
 
     protected ArrayList<Animal> list;
+    private int mData;
 
     public Database() {
                 this.list = new ArrayList<>();
@@ -36,8 +37,29 @@ public class Database implements Serializable {
         threeNames.add(this.list.get(2));
         return threeNames;
     }
+
     public ArrayList<Animal> getList() {
         return this.list;
+    }
+
+
+    public int describeContents() {
+        return 0;
+    }
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(mData);
+    }
+    public static final Parcelable.Creator<Database> CREATOR
+            = new Parcelable.Creator<Database>() {
+        public Database createFromParcel(Parcel in) {
+            return new Database(in);
+        }
+        public Database[] newArray(int size) {
+            return new Database[size];
+        }
+    };
+    private Database(Parcel in) {
+        mData = in.readInt();
     }
 
 }
