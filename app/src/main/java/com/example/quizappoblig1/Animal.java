@@ -24,7 +24,6 @@ public class Animal implements Parcelable {
     public String toString() {  return "Name="+this.name+" imageInt="+this.image;  }
 
 
-
     public int describeContents() {
         return 0;
     }

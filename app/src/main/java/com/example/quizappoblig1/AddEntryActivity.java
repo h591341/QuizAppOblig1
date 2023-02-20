@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -37,28 +39,25 @@ public class AddEntryActivity extends AppCompatActivity {
         db = new Database();
         imagePreview = findViewById(R.id.imagePreview);
 
-        // BRUK MEDIAFILE
-        // FÅ THUMBNAIL OG URI FOR FIL
-        // SPØR OM FIL, HENT DEN
-        // Images.Media
-        // MediaStore.Images.Media... |URI|
-
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
+
+        AnimalAdapter adapter = new AnimalAdapter(this, R.layout.activity_add_entry, db.getList());
+        ListView listView = (ListView) findViewById(R.id.animalList);
+        listView.setAdapter(adapter);
 
         Button addEntry = findViewById(R.id.submitEntry);
         addEntry.setOnClickListener((v) -> {
             if(!pictureText.getText().toString().isEmpty() && imagePreview.getId() != -1) {
                 try {
-                    db.addEntry(new Animal(pictureText.getText().toString(), imagePreview.getId()));
+                    Animal animal = new Animal(pictureText.getText().toString(), imagePreview.getId());
+                    db.addEntry(animal);
+                    adapter.add(animal);
                 } catch (Exception e) {
                     Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal");
                 }
-                Log.d("addEntryM", db.getList().get(4).getName());
-                Log.d("addEntryM", "" + db.getList().size());
             }
             });
-
        }
     public void selectImage() {
         Intent intent = new Intent();
