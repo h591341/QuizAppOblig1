@@ -5,11 +5,6 @@ import static java.util.Collections.shuffle;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Database implements Parcelable {

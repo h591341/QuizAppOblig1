@@ -1,11 +1,14 @@
 package com.example.quizappoblig1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,9 +26,9 @@ public class AddEntryActivity extends AppCompatActivity {
     ImageView imagePreview;
     int select_picture = 200;
 
-    String name;
-    int image;
     Database db;
+    private RecyclerView rView;
+    private AnimalAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +36,20 @@ public class AddEntryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_entry);
 
         //ArrayList<Animal> db = getIntent().getParcelableArrayListExtra("dbase", Animal.class);
-        // Log.d("SATAN", db.get(0).getName());
+
         Button addPicture = findViewById(R.id.addPicture);
         addPicture.setOnClickListener(v -> selectImage());
         db = new Database();
         imagePreview = findViewById(R.id.imagePreview);
+        rView = findViewById(R.id.animalList);
+        rView.setLayoutManager(new LinearLayoutManager(this));
 
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-        AnimalAdapter adapter = new AnimalAdapter(this, R.layout.activity_add_entry, db.getList());
-        ListView listView = (ListView) findViewById(R.id.animalList);
-        listView.setAdapter(adapter);
+        adapter = new AnimalAdapter(db.getList());
+        rView.setAdapter(adapter);
+
 
         Button addEntry = findViewById(R.id.submitEntry);
         addEntry.setOnClickListener((v) -> {
@@ -52,7 +57,7 @@ public class AddEntryActivity extends AppCompatActivity {
                 try {
                     Animal animal = new Animal(pictureText.getText().toString(), imagePreview.getId());
                     db.addEntry(animal);
-                    adapter.add(animal);
+                    adapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal");
                 }

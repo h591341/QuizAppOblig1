@@ -1,13 +1,11 @@
 package com.example.quizappoblig1;
 
-import static java.util.Collections.shuffle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 import java.util.Random;
-import java.util.Timer;
 
 import android.annotation.SuppressLint;
 
@@ -35,14 +33,8 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private Database db;
     private boolean difficulty;
-
-
-
-
-
-        TextView timer;
-
-        CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
+    private TextView timer;
+    public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timer.setText(millisUntilFinished / 1000 + "s");
@@ -64,13 +56,6 @@ public class QuizActivity extends AppCompatActivity {
 
         };
 
-
-
-
-
-
-    private final int DELAY = 3000;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,14 +69,10 @@ public class QuizActivity extends AppCompatActivity {
         db = bundle.getParcelable("db", Database.class);
         Log.d("db0Name", db.getList().get(0).toString());
         */
+
         db = new Database();
         difficulty = getIntent().getBooleanExtra("switch", true);
 
-        // Not implementet yet
-        //If hard mode is activated
-        //if (difficulty.equals("hard")) {
-        //    startInactivityTimer();
-        //}
 
 
         image = findViewById(R.id.image);
@@ -154,7 +135,6 @@ public class QuizActivity extends AppCompatActivity {
 
         timer = (TextView) findViewById(R.id.timer);
 
-
     }
 
 
@@ -206,14 +186,4 @@ public class QuizActivity extends AppCompatActivity {
         return position == correctInt;
     }
 
-    /**
-    private ArrayList<Animal> getNewQuestion() {
-        shuffle(db.list);
-        ArrayList<Animal> threeNames = new ArrayList<>();
-        threeNames.add(db.getList().get(0));
-        threeNames.add(db.getList().get(1));
-        threeNames.add(db.getList().get(2));
-        return threeNames;
-    }
-     */
 }

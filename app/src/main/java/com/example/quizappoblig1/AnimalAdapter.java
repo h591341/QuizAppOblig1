@@ -9,25 +9,47 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AnimalAdapter extends ArrayAdapter<Animal> {
 
-    ArrayList<Animal> animalList = new ArrayList<>();
-    public AnimalAdapter(Context context, int textViewResourceId, ArrayList<Animal> animals) {
-        super(context, textViewResourceId, animals);
-        animalList = animals;
+
+public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder> {
+    private ArrayList<Animal> animalList;
+
+    public AnimalAdapter(ArrayList<Animal> animalList) {
+        this.animalList = animalList;
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.activity_add_entry, null);
-        TextView textView = (TextView) view.findViewById(R.id.animalName);
-        Log.d("textView", textView.toString());
-        ImageView imageView = (ImageView) view.findViewById(R.id.animalImage);
-        textView.setText(animalList.get(position).getName());
-        imageView.setImageResource(animalList.get(position).getImage());
-        return view;
+    @NonNull
+    public AnimalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.animaltemplate, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AnimalAdapter.ViewHolder holder, int position) {
+            Log.d("db", animalList.get(0).getName());
+            holder.nameView.setText(animalList.get(position).getName());
+            holder.imageView.setImageResource(animalList.get(position).getImage());
+    }
+
+    @Override
+    public int getItemCount() {
+        return animalList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView nameView;
+        private ImageView imageView;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nameView = itemView.findViewById(R.id.animalName);
+            imageView = itemView.findViewById(R.id.animalImage);
+        }
     }
 }
