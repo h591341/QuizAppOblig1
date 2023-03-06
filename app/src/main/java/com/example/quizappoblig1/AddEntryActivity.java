@@ -26,7 +26,7 @@ public class AddEntryActivity extends AppCompatActivity {
     ImageView imagePreview;
     int select_picture = 200;
 
-    Database db;
+    AnimalDatabase db;
     private RecyclerView rView;
     private AnimalAdapter adapter;
 
@@ -39,7 +39,7 @@ public class AddEntryActivity extends AppCompatActivity {
 
         Button addPicture = findViewById(R.id.addPicture);
         addPicture.setOnClickListener(v -> selectImage());
-        db = new Database();
+        AnimalDAO animalDao = db.animalDao();
         imagePreview = findViewById(R.id.imagePreview);
         rView = findViewById(R.id.animalList);
         rView.setLayoutManager(new LinearLayoutManager(this));

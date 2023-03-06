@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import java.util.List;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -31,7 +32,7 @@ public class QuizActivity extends AppCompatActivity {
     private Integer attempts = 0;
     private int correctInt;
     private TextView scoreText;
-    private Database db;
+    private AnimalDatabase db;
     private boolean difficulty;
     private TextView timer;
     public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
@@ -70,7 +71,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("db0Name", db.getList().get(0).toString());
         */
 
-        db = new Database();
+        AnimalDAO animalDao = db.animalDao();
         difficulty = getIntent().getBooleanExtra("switch", true);
 
 
@@ -101,14 +102,13 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-
-
     public void newQuestion() {
-        ArrayList<Animal> liste = db.getNewQuestion();
-        correctInt = rnd.nextInt(db.list.size()-1);
+        List<Animal> liste = db.animalDao().getThree();
+        correctInt = rnd.nextInt(liste.size());
         for(Animal a : liste) { Log.d("AnimalToString", a.toString()); }
         Log.d("CorrectInt", ""+correctInt);
         if(correctInt == 0) {
+            image.set
             image.setImageResource(liste.get(0).getImage());
             btn1.setText(liste.get(0).getName());
             btn2.setText(liste.get(1).getName());
