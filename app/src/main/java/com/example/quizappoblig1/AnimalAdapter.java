@@ -1,6 +1,7 @@
 package com.example.quizappoblig1;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder> {
-    private ArrayList<Animal> animalList;
+    private List<Animal> animalList;
 
-    public AnimalAdapter(ArrayList<Animal> animalList) {
+    public AnimalAdapter(List<Animal> animalList) {
         this.animalList = animalList;
     }
 
@@ -35,7 +36,9 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     public void onBindViewHolder(@NonNull AnimalAdapter.ViewHolder holder, int position) {
             Log.d("db", animalList.get(0).getName());
             holder.nameView.setText(animalList.get(position).getName());
-            holder.imageView.setImageResource(animalList.get(position).getImage());
+            byte[] picture = animalList.get(position).getImage();
+            holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
+
     }
 
     @Override

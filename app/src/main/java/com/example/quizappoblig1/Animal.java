@@ -27,6 +27,9 @@ public class Animal {
         return this.name;
     }
     public byte[] getImage() { return this.image; }
+    public int getId() { return this.id; }
+    public void setId(int id) { this.id = id; }
+
     @Override
     public String toString() {  return "Name="+this.name+" imageInt="+this.image;  }
 

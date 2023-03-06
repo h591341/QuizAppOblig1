@@ -10,6 +10,7 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -27,7 +28,6 @@ public class QuizActivity extends AppCompatActivity {
     private Button btn2;
     private Button btn3;
     private Button btn4;
-
     private Integer score = 0;
     private Integer attempts = 0;
     private int correctInt;
@@ -71,7 +71,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("db0Name", db.getList().get(0).toString());
         */
 
-        AnimalDAO animalDao = db.animalDao();
+        db = AnimalDatabase.getInstance(this);
         difficulty = getIntent().getBooleanExtra("switch", true);
 
 
@@ -104,22 +104,25 @@ public class QuizActivity extends AppCompatActivity {
 
     public void newQuestion() {
         List<Animal> liste = db.animalDao().getThree();
+        Log.d("ListeSize", ""+liste.size());
         correctInt = rnd.nextInt(liste.size());
         for(Animal a : liste) { Log.d("AnimalToString", a.toString()); }
         Log.d("CorrectInt", ""+correctInt);
         if(correctInt == 0) {
-            image.set
-            image.setImageResource(liste.get(0).getImage());
+            byte[] picture = liste.get(0).getImage();
+            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
             btn1.setText(liste.get(0).getName());
             btn2.setText(liste.get(1).getName());
             btn3.setText(liste.get(2).getName());
         } else if(correctInt == 1 ) {
-            image.setImageResource(liste.get(1).getImage());
+            byte[] picture = liste.get(1).getImage();
+            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
             btn1.setText(liste.get(0).getName());
             btn2.setText(liste.get(1).getName());
             btn3.setText(liste.get(2).getName());
         } else {
-            image.setImageResource(liste.get(2).getImage());
+            byte[] picture = liste.get(2).getImage();
+            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
             btn1.setText(liste.get(0).getName());
             btn2.setText(liste.get(1).getName());
             btn3.setText(liste.get(2).getName());
