@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Layout;
@@ -18,14 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-
 
 public class AddEntryActivity extends AppCompatActivity {
 
     ImageView imagePreview;
     int select_picture = 200;
-
     AnimalDatabase db;
     private RecyclerView rView;
     private AnimalAdapter adapter;
@@ -35,11 +36,9 @@ public class AddEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-        //ArrayList<Animal> db = getIntent().getParcelableArrayListExtra("dbase", Animal.class);
-
         Button addPicture = findViewById(R.id.addPicture);
         addPicture.setOnClickListener(v -> selectImage());
-        AnimalDAO animalDao = db.animalDao();
+        db = AnimalDatabase.getInstance(this);
         imagePreview = findViewById(R.id.imagePreview);
         rView = findViewById(R.id.animalList);
         rView.setLayoutManager(new LinearLayoutManager(this));
@@ -47,7 +46,7 @@ public class AddEntryActivity extends AppCompatActivity {
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-        adapter = new AnimalAdapter(db.getList());
+        adapter = new AnimalAdapter(db.animalDao().getAnimalList());
         rView.setAdapter(adapter);
 
 
@@ -55,8 +54,12 @@ public class AddEntryActivity extends AppCompatActivity {
         addEntry.setOnClickListener((v) -> {
             if(!pictureText.getText().toString().isEmpty() && imagePreview.getId() != -1) {
                 try {
-                    Animal animal = new Animal(pictureText.getText().toString(), imagePreview.getId());
-                    db.addEntry(animal);
+                    Bitmap bitmap = ((BitmapDrawable) imagePreview.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageInByte = baos.toByteArray();
+                    Animal animal = new Animal(pictureText.getText().toString(), imageInByte);
+                    db.animalDao().insertAnimal(animal);
                     adapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     Log.d("addEntry", "Noe gikk feil i 'addEntry' eller 'new Animal");
