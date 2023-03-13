@@ -14,11 +14,14 @@ public interface AnimalDAO {
     List<Animal> getAnimalList();
 
     @Insert
-    public void insertAnimal(Animal animal);
+    void insertAnimal(Animal animal);
 
     @Delete
-    public void deleteAnimal(Animal animal);
+    void deleteAnimal(Animal animal);
 
     @Query("Select * from animal Order by RANDOM() limit 3")
-    public List<Animal> getThree();
+    List<Animal> getThree();
+
+    @Insert
+    void insertAll(Animal... animalArray);
 }

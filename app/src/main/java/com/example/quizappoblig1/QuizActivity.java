@@ -57,24 +57,13 @@ public class QuizActivity extends AppCompatActivity {
 
         };
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-
-        /**
-        Bundle bundle = getIntent().getBundleExtra("dbase");
-        Log.d("bundleString", bundle.getParcelable("db", Database.class).getList().get(0).toString());
-        db = bundle.getParcelable("db", Database.class);
-        Log.d("db0Name", db.getList().get(0).toString());
-        */
-
         db = AnimalDatabase.getInstance(this);
         difficulty = getIntent().getBooleanExtra("switch", true);
-
-
 
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
@@ -98,16 +87,13 @@ public class QuizActivity extends AppCompatActivity {
             newQuestion();
         });
         newQuestion();
-
     }
 
-
-    public void newQuestion() {
+    public int newQuestion() {
         List<Animal> liste = db.animalDao().getThree();
-        Log.d("ListeSize", ""+liste.size());
+        Log.d("Lengde", ""+liste.size());
         correctInt = rnd.nextInt(liste.size());
-        for(Animal a : liste) { Log.d("AnimalToString", a.toString()); }
-        Log.d("CorrectInt", ""+correctInt);
+
         if(correctInt == 0) {
             byte[] picture = liste.get(0).getImage();
             image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
@@ -136,8 +122,8 @@ public class QuizActivity extends AppCompatActivity {
         btn4.setEnabled(false);
         if(difficulty) { timerObject.start(); }
 
-        timer = (TextView) findViewById(R.id.timer);
-
+        timer = findViewById(R.id.timer);
+        return correctInt;
     }
 
 
@@ -156,7 +142,7 @@ public class QuizActivity extends AppCompatActivity {
         btn4.setEnabled(true);
         if(difficulty) { timerObject.cancel(); }
 
-        timer = (TextView) findViewById(R.id.timer);
+        timer = findViewById(R.id.timer);
 
     }
 
@@ -188,5 +174,4 @@ public class QuizActivity extends AppCompatActivity {
     public boolean isCorrect (int position) {
         return position == correctInt;
     }
-
 }
