@@ -28,9 +28,10 @@ public class QuizActivity extends AppCompatActivity {
     private Button btn2;
     private Button btn3;
     private Button btn4;
-    private Integer score = 0;
-    private Integer attempts = 0;
-    private int correctInt;
+
+    private static Integer score = 0;
+    private static Integer attempts = 0;
+    private static int correctInt;
     private TextView scoreText;
     private AnimalDatabase db;
     private boolean difficulty;
@@ -174,4 +175,19 @@ public class QuizActivity extends AppCompatActivity {
     public boolean isCorrect (int position) {
         return position == correctInt;
     }
+
+
+    public static int getCorrectAttemptId() {
+        // TODO: Implement a method to determine the correct Attemt ID
+        return attempts;
+    }
+    public static int getCorrectScoreId() {
+        // TODO: Implement a method to determine the correct score ID
+        return score;
+    }
+    public static int getCorrectButtonId() {
+        // TODO: Implement a method to determine the correct score ID
+        return correctInt;
+    }
+
 }

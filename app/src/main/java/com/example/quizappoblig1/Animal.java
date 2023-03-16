@@ -1,18 +1,10 @@
 package com.example.quizappoblig1;
 
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
-
-import androidx.core.content.res.ResourcesCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 
