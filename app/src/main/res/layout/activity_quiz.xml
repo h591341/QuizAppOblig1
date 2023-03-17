@@ -29,33 +29,32 @@
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
         android:text="What kind of animal is this?"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="206dp"
         android:layout_height="346dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginTop="36dp"
         android:layout_weight="2"
         android:src="@drawable/doggo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
         android:id="@+id/alt0"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="256dp"
         android:textColor="@color/material_dynamic_tertiary30"
         app:backgroundTint="@color/material_dynamic_neutral95"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +66,7 @@
         android:id="@+id/alt1"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="208dp"
+        android:layout_marginBottom="196dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,14 +78,13 @@
         android:id="@+id/alt2"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="136dp"
         android:backgroundTint="@color/material_dynamic_neutral95"
         android:textColor="@color/material_dynamic_tertiary30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <TextView
         android:id="@+id/textScore"
@@ -106,6 +104,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

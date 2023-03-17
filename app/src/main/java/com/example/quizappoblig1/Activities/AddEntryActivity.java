@@ -1,4 +1,4 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +15,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.Database.AnimalAdapter;
+import com.example.quizappoblig1.Database.AnimalDatabase;
+import com.example.quizappoblig1.R;
+import com.example.quizappoblig1.ViewModels.AnimalRepository;
+
 import java.io.ByteArrayOutputStream;
 
 public class AddEntryActivity extends AppCompatActivity {
@@ -33,6 +40,9 @@ public class AddEntryActivity extends AppCompatActivity {
         Button addPicture = findViewById(R.id.addPicture);
         addPicture.setOnClickListener(v -> selectImage());
         db = AnimalDatabase.getInstance(this);
+
+        Log.d("animal1", db.animalDao().getAnimalList().getValue().get(0).getName());
+
         imagePreview = findViewById(R.id.imagePreview);
         rView = findViewById(R.id.animalList);
         rView.setLayoutManager(new LinearLayoutManager(this));
@@ -40,9 +50,9 @@ public class AddEntryActivity extends AppCompatActivity {
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-        adapter = new AnimalAdapter(db.animalDao().getAnimalList());
+        AnimalRepository repository = new AnimalRepository(getApplication());
+        adapter = new AnimalAdapter(repository);
         rView.setAdapter(adapter);
-
 
         Button addEntry = findViewById(R.id.submitEntry);
         addEntry.setOnClickListener((v) -> {

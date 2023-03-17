@@ -1,4 +1,4 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Database;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
+
+import com.example.quizappoblig1.R;
 
 public class MainMenuActivity extends AppCompatActivity {
 

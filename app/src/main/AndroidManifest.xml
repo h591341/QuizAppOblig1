@@ -12,15 +12,18 @@
         android:theme="@style/Theme.QuizAppOblig1"
         tools:targetApi="31">
         <activity
-            android:name=".QuizActivity"
+            android:name=".Activities.QuizActivity"
+            android:configChanges="orientation"
             android:exported="false"
-            android:parentActivityName=".MainMenuActivity"/>
+            android:parentActivityName=".Activities.MainMenuActivity"/>
         <activity
-            android:name=".AddEntryActivity"
+            android:name=".Activities.AddEntryActivity"
+            android:configChanges="orientation"
             android:exported="false"
-            android:parentActivityName=".MainMenuActivity"/>
+            android:parentActivityName=".Activities.MainMenuActivity"/>
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".Activities.MainMenuActivity"
+            android:configChanges="orientation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

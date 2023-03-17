@@ -1,28 +1,31 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Database;
 
-import android.content.Context;
+
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.R;
+import com.example.quizappoblig1.ViewModels.AnimalRepository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder> {
-    private List<Animal> animalList;
+    private final List<Animal> animalList = new ArrayList<>();
+    private final AnimalRepository repository;
+    private final List<ViewHolder> animalViewHolderList = new ArrayList<>();
 
-    public AnimalAdapter(List<Animal> animalList) {
-        this.animalList = animalList;
+    public AnimalAdapter(AnimalRepository repository) {
+        super();
+        this.repository = repository;
     }
 
     @Override
@@ -33,12 +36,11 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnimalAdapter.ViewHolder holder, int position) {
-            Log.d("db", animalList.get(0).getName());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if(animalList.size() == 0) return;
             holder.nameView.setText(animalList.get(position).getName());
             byte[] picture = animalList.get(position).getImage();
             holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
-
     }
 
     @Override

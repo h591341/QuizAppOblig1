@@ -1,4 +1,4 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Activities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.Database.AnimalDatabase;
+import com.example.quizappoblig1.R;
 
 
 public class QuizActivity extends AppCompatActivity {
@@ -42,11 +46,10 @@ public class QuizActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish()   {
                 attempts++;
                 showAnswers();
                 updateScore();
-
 
                 btn1.setEnabled(false);
                 btn2.setEnabled(false);

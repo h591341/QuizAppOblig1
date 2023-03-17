@@ -1,9 +1,12 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.quizappoblig1.Animal;
 
 import java.util.List;
 
@@ -11,7 +14,7 @@ import java.util.List;
 public interface AnimalDAO {
 
     @Query("Select * from animal")
-    List<Animal> getAnimalList();
+    LiveData<List<Animal>> getAnimalList();
 
     @Insert
     void insertAnimal(Animal animal);
@@ -24,4 +27,7 @@ public interface AnimalDAO {
 
     @Insert
     void insertAll(Animal... animalArray);
+
+    @Query("Select * from animal where name = :name")
+    List<Animal> find(String name);
 }

@@ -1,4 +1,4 @@
-package com.example.quizappoblig1;
+package com.example.quizappoblig1.Database;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,15 +6,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
+import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.R;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
 @Database(entities = Animal.class, version = 1, exportSchema = false)
