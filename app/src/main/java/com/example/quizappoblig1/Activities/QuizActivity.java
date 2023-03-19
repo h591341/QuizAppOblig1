@@ -1,27 +1,24 @@
 package com.example.quizappoblig1.Activities;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Random;
-
-import android.annotation.SuppressLint;
+import android.util.Log;
 
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
+import com.example.quizappoblig1.ViewModels.AnimalRepository;
 
 
 public class QuizActivity extends AppCompatActivity {
@@ -38,6 +35,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private AnimalDatabase db;
     private boolean difficulty;
+    private AnimalRepository repository;
     private TextView timer;
     public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
             @Override
@@ -67,6 +65,7 @@ public class QuizActivity extends AppCompatActivity {
 
         db = AnimalDatabase.getInstance(this);
         difficulty = getIntent().getBooleanExtra("switch", true);
+        AnimalRepository repository = new AnimalRepository(getApplication());
 
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
@@ -93,6 +92,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public int newQuestion() {
+        repository
         List<Animal> liste = db.animalDao().getThree();
         Log.d("Lengde", ""+liste.size());
         correctInt = rnd.nextInt(liste.size());

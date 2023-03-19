@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalAdapter;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
@@ -41,7 +41,6 @@ public class AddEntryActivity extends AppCompatActivity {
         addPicture.setOnClickListener(v -> selectImage());
         db = AnimalDatabase.getInstance(this);
 
-        Log.d("animal1", db.animalDao().getAnimalList().getValue().get(0).getName());
 
         imagePreview = findViewById(R.id.imagePreview);
         rView = findViewById(R.id.animalList);

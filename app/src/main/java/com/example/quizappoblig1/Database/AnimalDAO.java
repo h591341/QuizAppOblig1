@@ -5,8 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-
-import com.example.quizappoblig1.Animal;
+import com.example.quizappoblig1.Database.Animal;
 
 import java.util.List;
 
@@ -30,4 +29,6 @@ public interface AnimalDAO {
 
     @Query("Select * from animal where name = :name")
     List<Animal> find(String name);
+
+
 }
