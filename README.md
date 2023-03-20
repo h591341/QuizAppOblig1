@@ -28,7 +28,7 @@ After launching the main activity the test is checking that the four pictures is
 
 After writing the following command in the Android Studio terminal...  
 
-*" ./gradlew connectedAndroidTest --info"*
+```*" ./gradlew connectedAndroidTest --info"*
 
 we get the following **output**:
 
