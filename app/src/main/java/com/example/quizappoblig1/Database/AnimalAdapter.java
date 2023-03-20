@@ -9,19 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.R;
-import com.example.quizappoblig1.ViewModels.AnimalRepository;
+import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder> {
     private final List<Animal> animalList = new ArrayList<>();
-    private final AnimalRepository repository;
+    private final AnimalAsyncTask repository;
     private final List<ViewHolder> animalViewHolderList = new ArrayList<>();
 
-    public AnimalAdapter(AnimalRepository repository) {
+    public AnimalAdapter(AnimalAsyncTask repository) {
         super();
         this.repository = repository;
     }

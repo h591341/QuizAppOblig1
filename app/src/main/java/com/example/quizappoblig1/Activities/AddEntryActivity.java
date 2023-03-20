@@ -20,9 +20,10 @@ import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalAdapter;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
-import com.example.quizappoblig1.ViewModels.AnimalRepository;
+import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class AddEntryActivity extends AppCompatActivity {
 
@@ -49,7 +50,12 @@ public class AddEntryActivity extends AppCompatActivity {
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-        AnimalRepository repository = new AnimalRepository(getApplication());
+        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(List<Animal> output) {
+
+            }
+        });
         adapter = new AnimalAdapter(repository);
         rView.setAdapter(adapter);
 

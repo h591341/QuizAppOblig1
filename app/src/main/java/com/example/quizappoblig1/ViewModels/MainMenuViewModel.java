@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalDatabase;
-import com.example.quizappoblig1.Database.FindAsyncResponse;
 
 import java.util.List;
 
@@ -19,19 +18,24 @@ public class MainMenuViewModel extends AndroidViewModel {
 
     public MainMenuViewModel(Application application) {
         super(application);
-        repository = new AnimalAsyncTask(db.animalDao());
-        allAnimals = repository.getAnimalList();
+        repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(List<Animal> output) {
+
+            }
+        });
+        allAnimals = db.animalDao().getAnimalList();
     }
 
     public LiveData<List<Animal>> getAllAnimals() {
         return allAnimals;
     }
 
-    public void findAnimalByName(String name, FindAsyncResponse response) {
-        repository.find(name, response);
+    public void findAnimalByName(String name) {
+        db.animalDao().find(name);
     }
     public void deleteAnimal(Animal animal) {
-        repository.deleteAnimal(animal);
+        db.animalDao().deleteAnimal(animal);
     }
 
 }

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 import java.util.Random;
+
+import android.os.AsyncTask;
 import android.util.Log;
 
 import android.graphics.BitmapFactory;
@@ -18,7 +20,7 @@ import android.widget.TextView;
 import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
-import com.example.quizappoblig1.ViewModels.AnimalRepository;
+import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;
 
 
 public class QuizActivity extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private AnimalDatabase db;
     private boolean difficulty;
-    private AnimalRepository repository;
+    private AnimalAsyncTask repository;
     private TextView timer;
     public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
             @Override
@@ -65,7 +67,12 @@ public class QuizActivity extends AppCompatActivity {
 
         db = AnimalDatabase.getInstance(this);
         difficulty = getIntent().getBooleanExtra("switch", true);
-        AnimalRepository repository = new AnimalRepository(getApplication());
+        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(List<Animal> output) {
+                newQuestion();
+            }
+        });
 
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
@@ -88,46 +95,32 @@ public class QuizActivity extends AppCompatActivity {
         btn4.setOnClickListener((v) -> {
             newQuestion();
         });
-        newQuestion();
     }
 
-    public int newQuestion() {
-        repository
-        List<Animal> liste = db.animalDao().getThree();
-        Log.d("Lengde", ""+liste.size());
-        correctInt = rnd.nextInt(liste.size());
+    public void newQuestion() {
+        db.animalDao().getThree(new AnimalAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(List<Animal> liste) {
+                correctInt = rnd.nextInt(liste.size());
 
-        if(correctInt == 0) {
-            byte[] picture = liste.get(0).getImage();
-            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
-            btn1.setText(liste.get(0).getName());
-            btn2.setText(liste.get(1).getName());
-            btn3.setText(liste.get(2).getName());
-        } else if(correctInt == 1 ) {
-            byte[] picture = liste.get(1).getImage();
-            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
-            btn1.setText(liste.get(0).getName());
-            btn2.setText(liste.get(1).getName());
-            btn3.setText(liste.get(2).getName());
-        } else {
-            byte[] picture = liste.get(2).getImage();
-            image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
-            btn1.setText(liste.get(0).getName());
-            btn2.setText(liste.get(1).getName());
-            btn3.setText(liste.get(2).getName());
-        }
-        btn1.setBackgroundColor(getResources().getColor(R.color.blue));
-        btn2.setBackgroundColor(getResources().getColor(R.color.blue));
-        btn3.setBackgroundColor(getResources().getColor(R.color.blue));
-        btn2.setEnabled(true);
-        btn1.setEnabled(true);
-        btn3.setEnabled(true);
-        btn4.setEnabled(false);
-        if(difficulty) { timerObject.start(); }
+                byte[] picture = liste.get(correctInt).getImage();
+                image.setImageBitmap(BitmapFactory.decodeByteArray(picture, 0, picture.length));
+                btn1.setText(liste.get(0).getName());
+                btn2.setText(liste.get(1).getName());
+                btn3.setText(liste.get(2).getName());
 
-        timer = findViewById(R.id.timer);
-        return correctInt;
+                btn1.setBackgroundColor(getResources().getColor(R.color.blue));
+                btn2.setBackgroundColor(getResources().getColor(R.color.blue));
+                btn3.setBackgroundColor(getResources().getColor(R.color.blue));
+                btn2.setEnabled(true);
+                btn1.setEnabled(true);
+                btn3.setEnabled(true);
+                btn4.setEnabled(false);
+                if(difficulty) { timerObject.start(); }
+            }
+        });
     }
+
 
 
     public void guess(int index) {

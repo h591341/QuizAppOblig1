@@ -9,7 +9,7 @@
     android:background="@color/material_dynamic_tertiary99"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context=".AddEntryActivity">
+    tools:context=".Activities.AddEntryActivity">
 
     <Button
         android:id="@+id/addPicture"

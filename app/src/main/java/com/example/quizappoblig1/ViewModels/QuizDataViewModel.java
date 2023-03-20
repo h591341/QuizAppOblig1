@@ -7,8 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.quizappoblig1.Database.AnimalDatabase;
-import com.example.quizappoblig1.Database.FindAsyncResponse;
-import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;
 import com.example.quizappoblig1.Database.Animal;
 
 import java.util.List;
@@ -29,8 +27,13 @@ public class QuizDataViewModel extends AndroidViewModel {
 
     public QuizDataViewModel(@NonNull Application application) {
         super(application);
-        repository = new AnimalAsyncTask(db.animalDao());
-        LiveData<List<Animal>> allAnimals = repository.getAnimalList();
+        repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(List<Animal> output) {
+
+            }
+        });
+        LiveData<List<Animal>> allAnimals = db.animalDao().getAnimalList();
         score = 0;
         attempts = 0;
     }
@@ -40,11 +43,11 @@ public class QuizDataViewModel extends AndroidViewModel {
     }
 
     public void insertAnimal(Animal animal) {
-        repository.insertAnimal(animal);
+        db.animalDao().insertAnimal(animal);
     }
 
-    public void findAnimalByName(String name, FindAsyncResponse response) {
-        repository.find(name, response);
+    public void findAnimalByName(String name) {
+        db.animalDao().find(name);
     }
 
     public Byte[] getPicture() {
