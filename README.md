@@ -1,6 +1,6 @@
 # Obligatory Assignment 1 & 2 DAT153
 
-# Task 2 (oblig 2)
+## Task 2 (oblig 2)
 
 **Test method testMainActivity():**
 
