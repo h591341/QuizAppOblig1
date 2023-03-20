@@ -1,6 +1,6 @@
 # Obligatory Assignment 1 & 2 DAT153
 
-**Group consists of:**
+**The group consists of:**
 
 Elias Nord   
 Espen Solhaug    
