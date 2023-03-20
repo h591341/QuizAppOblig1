@@ -4,6 +4,8 @@
 
 **Test method testMainActivity():**
 
+This method tests that clicking a button in the main-menu takes you to the right sub-activity, in this case the quiz acitivity. 
+
 This method launches the main menu and checks if the "Start Quiz" button shows up. It will then press this button and enter the quiz activity. 
 The test then checks if the first alternative is there and then clicks it.
 
