@@ -1,6 +1,7 @@
 package com.example.quizappoblig1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class AddEntryActivity extends AppCompatActivity {
 
@@ -85,5 +87,9 @@ public class AddEntryActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
+    }
+
+    public LiveData<List<Animal>> getInstance() {
+        return AnimalDatabase.getAllAnimals();
     }
 }

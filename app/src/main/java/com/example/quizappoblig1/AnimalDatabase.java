@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -15,10 +16,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 @Database(entities = Animal.class, version = 1, exportSchema = false)
 public abstract class AnimalDatabase extends RoomDatabase {
+
+    private static LiveData<List<Animal>> allAnimals;
 
     private static AnimalDatabase instance;
 
@@ -94,4 +98,10 @@ public abstract class AnimalDatabase extends RoomDatabase {
 
         return animalArray;
     }
+
+    public static LiveData<List<Animal>> getAllAnimals() {
+        return allAnimals;
+    }
+
+
 }
