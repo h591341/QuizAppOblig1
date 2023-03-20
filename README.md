@@ -2,7 +2,8 @@
 
 Group consists of:  
 Elias Nord   
-Espen Solhaug 
+Espen Solhaug    
+
 Tora Angell-Jacobsen 
 
 
