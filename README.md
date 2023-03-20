@@ -33,6 +33,7 @@ After writing the following command in the Android Studios terminal...
 we get the following **output**:
 
 At testDataBaseActivity:
+
 java.lang.NullPointerException: Attempt to invoke virtual method 'void androidx.lifecycle.LiveData.observe(androidx.lifecycle.LifecycleOwner, androidx.lifecycle.Observer)' on a null object reference
 at com.example.quizappoblig1.QuizTest.lambda$testDatabaseActivity$2(QuizTest.java:181)
 at com.example.quizappoblig1.QuizTest$$ExternalSyntheticLambda0.perform(Unknown Source:4)
@@ -50,7 +51,7 @@ at java.lang.reflect.Method.invoke(Native Method)
 at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
 
-At tesQuizActivity:
+At testQuizActivity:
 
 androidx.test.espresso.base.AssertionErrorHandler$AssertionFailedWithCauseError: 'an instance of android.widget.TextView and view.getText() with or without transformation to match: is "Score: 1/2"' doesn't match the selected view.
 Expected: an instance of android.widget.TextView and view.getText() with or without transformation to match: is "Score: 1/2"
