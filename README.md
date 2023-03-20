@@ -26,7 +26,8 @@ After launching the main activity the test is checking that the four pictures is
 
 ## Task 3 (oblig 2)
 
-After writing the following command... /n 
+After writing the following command...  
+
 " ./gradlew connectedAndroidTest --info", in Android Studios terminal, we get the following output:
 
 
