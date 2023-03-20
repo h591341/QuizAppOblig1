@@ -26,9 +26,9 @@ The correct alternative is retrieved by calling the static method getCorrectButt
 
 **Test method testDatabaseActivity():**
 
-This test checks that the number of registered pictures is correct after adding an entry.
+This is a method that tests whether a new entry is successfully added to the database in the Databaseactivity. 
 
-After launching the main activity the test is checking that the four pictures is displayed. It clicks the button for adding a new photo... 
+First, it initializes the Intents library, which is used to intercept and verify explicit intents that are fired by the activity under test. Then, it launches the DatabaseActivity. It checks that four images are displayed on the activity screen. Next, it sets up an Intent with an image URI to simulate image selection from the device's gallery, and then intercepts the intent using the intending method. After that, it gets the initial count of the number of entries in the database by subscribing to the instance of the AnimalDatabase class and observing changes to the list of animals. It then clicks the submit button to add a new entry to the database. Finally, it retrieves the updated count of entries from the database and verifies that it has increased by one, indicating that the new entry has been successfully added to the database. If the test passes, it releases the Intents library.
 
 
 ## Task 3 (oblig 2)
