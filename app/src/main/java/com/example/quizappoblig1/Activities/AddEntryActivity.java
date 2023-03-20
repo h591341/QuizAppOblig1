@@ -50,12 +50,7 @@ public class AddEntryActivity extends AppCompatActivity {
         EditText pictureText = findViewById(R.id.pictureName);
         pictureText.setOnClickListener(this::showSoftKeyboard);
 
-        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
-            @Override
-            public void processFinish(List<Animal> output) {
-
-            }
-        });
+        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao());
         adapter = new AnimalAdapter(repository);
         rView.setAdapter(adapter);
 

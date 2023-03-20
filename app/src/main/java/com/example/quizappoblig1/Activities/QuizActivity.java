@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 import java.util.Random;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
 import android.graphics.BitmapFactory;
 
 import android.os.Bundle;
@@ -40,25 +37,25 @@ public class QuizActivity extends AppCompatActivity {
     private AnimalAsyncTask repository;
     private TextView timer;
     public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timer.setText(millisUntilFinished / 1000 + "s");
-            }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            timer.setText(millisUntilFinished / 1000 + "s");
+        }
 
-            @Override
-            public void onFinish()   {
-                attempts++;
-                showAnswers();
-                updateScore();
+        @Override
+        public void onFinish()   {
+            attempts++;
+            showAnswers();
+            updateScore();
 
-                btn1.setEnabled(false);
-                btn2.setEnabled(false);
-                btn3.setEnabled(false);
-                btn4.setEnabled(true);
-                timer.setText("Time is up!");
-            }
+            btn1.setEnabled(false);
+            btn2.setEnabled(false);
+            btn3.setEnabled(false);
+            btn4.setEnabled(true);
+            timer.setText("Time is up!");
+        }
 
-        };
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +64,7 @@ public class QuizActivity extends AppCompatActivity {
 
         db = AnimalDatabase.getInstance(this);
         difficulty = getIntent().getBooleanExtra("switch", true);
-        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
-            @Override
-            public void processFinish(List<Animal> output) {
-                newQuestion();
-            }
-        });
+        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao());
 
         image = findViewById(R.id.image);
         btn1 = findViewById(R.id.alt0);
@@ -95,12 +87,14 @@ public class QuizActivity extends AppCompatActivity {
         btn4.setOnClickListener((v) -> {
             newQuestion();
         });
+        newQuestion();
     }
 
     public void newQuestion() {
-        db.animalDao().getThree(new AnimalAsyncTask.AsyncResponse() {
+        AnimalAsyncTask async = new AnimalAsyncTask(db.animalDao()) {
             @Override
-            public void processFinish(List<Animal> liste) {
+            protected void onPostExecute(List<Animal> liste) {
+                super.onPostExecute(liste);
                 correctInt = rnd.nextInt(liste.size());
 
                 byte[] picture = liste.get(correctInt).getImage();
@@ -118,7 +112,8 @@ public class QuizActivity extends AppCompatActivity {
                 btn4.setEnabled(false);
                 if(difficulty) { timerObject.start(); }
             }
-        });
+        };
+        async.execute();
     }
 
 
@@ -165,7 +160,6 @@ public class QuizActivity extends AppCompatActivity {
             btn3.setBackgroundColor(getResources().getColor(R.color.green));
         }
     }
-
 
     public boolean isCorrect (int position) {
         return position == correctInt;

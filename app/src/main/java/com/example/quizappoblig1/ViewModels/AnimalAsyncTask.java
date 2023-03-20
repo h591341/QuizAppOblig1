@@ -1,4 +1,3 @@
-
 package com.example.quizappoblig1.ViewModels;
 
 import android.os.AsyncTask;
@@ -10,21 +9,14 @@ import java.util.List;
 public class AnimalAsyncTask extends AsyncTask<Void, Void, List<Animal>> {
 
     private AnimalDAO animalDao;
-    private AsyncResponse delegate;
 
-    public AnimalAsyncTask(AnimalDAO animalDao, AsyncResponse delegate) {
+    public AnimalAsyncTask(AnimalDAO animalDao) {
         this.animalDao = animalDao;
-        this.delegate = delegate;
     }
 
     @Override
     protected List<Animal> doInBackground(Void... voids) {
-        return animalDao.getThree(new AsyncResponse() {
-            @Override
-            public void processFinish(List<Animal> output) {
-
-            }
-        });
+        return animalDao.getThree();
     }
 
     public void insert(Animal animal) {
@@ -63,9 +55,5 @@ public class AnimalAsyncTask extends AsyncTask<Void, Void, List<Animal>> {
             animalDao.deleteAnimal(animals[0]);
             return null;
         }
-    }
-
-    public interface AsyncResponse {
-        void processFinish(List<Animal> output);
     }
 }

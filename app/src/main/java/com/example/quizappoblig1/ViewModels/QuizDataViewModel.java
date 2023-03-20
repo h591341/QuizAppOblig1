@@ -27,12 +27,7 @@ public class QuizDataViewModel extends AndroidViewModel {
 
     public QuizDataViewModel(@NonNull Application application) {
         super(application);
-        repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
-            @Override
-            public void processFinish(List<Animal> output) {
-
-            }
-        });
+        repository = new AnimalAsyncTask(db.animalDao());
         LiveData<List<Animal>> allAnimals = db.animalDao().getAnimalList();
         score = 0;
         attempts = 0;

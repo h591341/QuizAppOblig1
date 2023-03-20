@@ -18,12 +18,7 @@ public class MainMenuViewModel extends AndroidViewModel {
 
     public MainMenuViewModel(Application application) {
         super(application);
-        repository = new AnimalAsyncTask(db.animalDao(), new AnimalAsyncTask.AsyncResponse() {
-            @Override
-            public void processFinish(List<Animal> output) {
-
-            }
-        });
+        repository = new AnimalAsyncTask(db.animalDao());
         allAnimals = db.animalDao().getAnimalList();
     }
 
