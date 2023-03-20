@@ -1,5 +1,11 @@
 # Obligatory Assignment 1 & 2 DAT153
 
+Group consists of  
+Elias Nord
+Espen Solhaug  
+Tora Angell-Jacobsen 
+
+
 ## Task 2 (oblig 2)
 
 **Test method testMainActivity():**
