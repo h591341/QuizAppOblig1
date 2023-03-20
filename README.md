@@ -26,11 +26,11 @@ After launching the main activity the test is checking that the four pictures is
 
 ## Task 3 (oblig 2)
 
-After writing the following command in Android Studios terminal...  
+After writing the following command in the Android Studios terminal...  
 
-" ./gradlew connectedAndroidTest --info"
+*" ./gradlew connectedAndroidTest --info"*
 
-we get the following output:
+we get the following **output**:
 
 
 
