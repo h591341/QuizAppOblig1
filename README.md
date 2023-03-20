@@ -24,4 +24,10 @@ This test checks that the number of registered pictures is correct after adding 
 After launching the main activity the test is checking that the four pictures is displayed. It clicks the button for adding a new photo... 
 
 
+## Task 3 (oblig 2)
+
+After writhing the following " ./gradlew connectedAndroidTest --info" in Android Studios terminal, we get the following output:
+
+
+
 
