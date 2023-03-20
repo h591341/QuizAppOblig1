@@ -28,7 +28,10 @@ After launching the main activity the test is checking that the four pictures is
 
 After writing the following command in the Android Studio terminal...  
 
-```*" ./gradlew connectedAndroidTest --info"*
+```
+*" ./gradlew connectedAndroidTest --info"*
+```
+
 
 we get the following **output**:
 
@@ -87,7 +90,8 @@ at android.os.Looper.loop(Looper.java:288)
 at android.app.ActivityThread.main(ActivityThread.java:7872)
 at java.lang.reflect.Method.invoke(Native Method)
 at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
-at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)```
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+```
 
 
 
