@@ -33,7 +33,7 @@ First, it initializes the Intents library, which is used to intercept and verify
 
 ## Task 3 (oblig 2)
 
-After writing the following command in the Android Studio terminal...  
+After writing the following command in the Android Studio Terminal...  
 
 ```
 ./gradlew connectedAndroidTest --info
