@@ -40,7 +40,7 @@ After writing the following command in the Android Studio terminal...
 ```
 
 
-...we get the following **output**:
+... we get the following **output**:
 
 ```
 At testDataBaseActivity:
