@@ -1,8 +1,8 @@
 # Obligatory Assignment 1 & 2 DAT153
 
 Group consists of:  
-Elias Nord 
-Espen Solhaug  
+Elias Nord   
+Espen Solhaug 
 Tora Angell-Jacobsen 
 
 
