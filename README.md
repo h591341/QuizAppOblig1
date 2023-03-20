@@ -1,6 +1,6 @@
 # QuizAppOblig1
 
-#Task 2 OBLIG 3
+# Task 2 OBLIG 3
 
 **Test method testMainActivity():**
 
