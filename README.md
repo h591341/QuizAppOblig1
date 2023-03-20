@@ -9,14 +9,14 @@ Tora Angell-Jacobsen
 
 ## Task 2 (oblig 2)
 
-**Test method testMainActivity():**
+**Test method - testMainActivity():**
 
 This method tests that clicking a button in the main-menu takes you to the right sub-activity, in this case the quiz acitivity. 
 
 The test launches the main menu and checks if the "Start Quiz" button shows up. It will then press this button and enter the quiz activity. 
 The test then checks if the first alternative is there and then clicks it. Finally, it closes the MainMenuActivity.
 
-**Test method testQuizActivity():**
+**Test method - testQuizActivity():**
 
 This test is testing the QuizActivity by checking that the alternatives for the quiz are displayed, 
 clicking on the correct option, incrementing the score and attempt count, and then clicking on an incorrect 
@@ -24,7 +24,7 @@ option and incrementing the attempt count again. Finally, it closes the QuizActi
 
 The correct alternative is retrieved by calling the static method getCorrectButtonId().
 
-**Test method testDatabaseActivity():**
+**Test method - testDatabaseActivity():**
 
 This is a method that tests whether a new entry is successfully added to the database in the Databaseactivity. 
 
