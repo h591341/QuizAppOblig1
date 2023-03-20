@@ -1,15 +1,22 @@
 # Obligatory Assignment 1 & 2 DAT153
 
+**The group consists of:**
+
+Elias Nord   
+Espen Solhaug    
+Tora Angell-Jacobsen 
+
+
 ## Task 2 (oblig 2)
 
-**Test method testMainActivity():**
+**Test method - testMainActivity():**
 
 This method tests that clicking a button in the main-menu takes you to the right sub-activity, in this case the quiz acitivity. 
 
 The test launches the main menu and checks if the "Start Quiz" button shows up. It will then press this button and enter the quiz activity. 
 The test then checks if the first alternative is there and then clicks it. Finally, it closes the MainMenuActivity.
 
-**Test method testQuizActivity():**
+**Test method - testQuizActivity():**
 
 This test is testing the QuizActivity by checking that the alternatives for the quiz are displayed, 
 clicking on the correct option, incrementing the score and attempt count, and then clicking on an incorrect 
@@ -17,22 +24,26 @@ option and incrementing the attempt count again. Finally, it closes the QuizActi
 
 The correct alternative is retrieved by calling the static method getCorrectButtonId().
 
-**Test method testDatabaseActivity():**
+**Test method - testDatabaseActivity():**
 
-This test checks that the number of registered pictures is correct after adding an entry.
+This is a method that tests whether a new entry is successfully added to the database in the Databaseactivity. 
 
-After launching the main activity the test is checking that the four pictures is displayed. It clicks the button for adding a new photo... 
+First, it initializes the Intents library, which is used to intercept and verify explicit intents that are fired by the activity under test. Then, it launches the DatabaseActivity. It checks that four images are displayed on the activity screen. Next, it sets up an Intent with an image URI to simulate image selection from the device's gallery, and then intercepts the intent using the intending method. After that, it gets the initial count of the number of entries in the database by subscribing to the instance of the AnimalDatabase class and observing changes to the list of animals. It then clicks the submit button to add a new entry to the database. Finally, it retrieves the updated count of entries from the database and verifies that it has increased by one, indicating that the new entry has been successfully added to the database. If the test passes, it releases the Intents library.
 
 
 ## Task 3 (oblig 2)
 
-After writing the following command in the Android Studio terminal...  
+After writing the following command in the Android Studio Terminal...  
 
-*" ./gradlew connectedAndroidTest --info"*
+```
+./gradlew connectedAndroidTest --info
+```
 
-we get the following **output**:
 
-```At testDataBaseActivity:
+... we get the following **output**:
+
+```
+At testDataBaseActivity:
 
 java.lang.NullPointerException: Attempt to invoke virtual method 'void androidx.lifecycle.LiveData.observe(androidx.lifecycle.LifecycleOwner, androidx.lifecycle.Observer)' on a null object reference
 at com.example.quizappoblig1.QuizTest.lambda$testDatabaseActivity$2(QuizTest.java:181)
@@ -86,7 +97,8 @@ at android.os.Looper.loop(Looper.java:288)
 at android.app.ActivityThread.main(ActivityThread.java:7872)
 at java.lang.reflect.Method.invoke(Native Method)
 at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
-at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)```
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+```
 
 
 
