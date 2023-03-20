@@ -32,7 +32,8 @@ After writing the following command in the Android Studio terminal...
 
 we get the following **output**:
 
-```At testDataBaseActivity:
+```
+At testDataBaseActivity:
 
 java.lang.NullPointerException: Attempt to invoke virtual method 'void androidx.lifecycle.LiveData.observe(androidx.lifecycle.LifecycleOwner, androidx.lifecycle.Observer)' on a null object reference
 at com.example.quizappoblig1.QuizTest.lambda$testDatabaseActivity$2(QuizTest.java:181)
