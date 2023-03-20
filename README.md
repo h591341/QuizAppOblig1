@@ -1,6 +1,6 @@
-# QuizAppOblig1
+# Obligatory Assignment 1 & 2 DAT153
 
-# Task 2 OBLIG 3
+# Task 2 (oblig 2)
 
 **Test method testMainActivity():**
 
