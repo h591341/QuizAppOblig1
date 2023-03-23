@@ -15,6 +15,9 @@ public interface AnimalDAO {
     @Query("Select * from animal")
     LiveData<List<Animal>> getAnimalList();
 
+    @Query("Select * from animal")
+    List<Animal> getAnimalList2();
+
     @Insert
     void insertAnimal(Animal animal);
 

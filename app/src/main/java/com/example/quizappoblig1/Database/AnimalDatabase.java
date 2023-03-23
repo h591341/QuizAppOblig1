@@ -17,34 +17,33 @@ import java.io.ByteArrayOutputStream;
 
 @Database(entities = Animal.class, version = 2, exportSchema = false)
 public abstract class AnimalDatabase extends RoomDatabase {
-
     private static AnimalDatabase instance;
 
     public abstract AnimalDAO animalDao();
 
     public static synchronized AnimalDatabase getInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             instance = buildDatabase(context);
         }
         return instance;
     }
 
     private static AnimalDatabase buildDatabase(final Context context) {
-        return Room.databaseBuilder(context,
-                AnimalDatabase.class,
-                "animal_db")
-                .addCallback(new Callback() {
-                    @Override
-                    public void onCreate(SupportSQLiteDatabase db) {
-                        super.onCreate(db);
-                        Log.d("AnimalDatabase", "Database created, populating data...");
-                        Animal[] animals = populateData(context.getResources());
-                        AnimalDAO dao = getInstance(context).animalDao();
-                        dao.insertAll(animals);
-                    }
-                })
+        AnimalDatabase db = Room.databaseBuilder(context,
+                        AnimalDatabase.class,
+                        "animal_db")
                 .fallbackToDestructiveMigration()
                 .build();
+
+        try {
+            if(db.animalDao().find("Dinosaur") != null) {
+                Animal[] animals = populateData(context.getResources());
+                db.animalDao().insertAll(animals);
+            }
+        } catch (Exception e) {
+
+        }
+        return db;
     }
 
     public static Animal[] populateData(Resources resources) {

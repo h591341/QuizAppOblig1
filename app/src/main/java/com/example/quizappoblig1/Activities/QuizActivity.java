@@ -1,15 +1,20 @@
 package com.example.quizappoblig1.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Random;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +22,7 @@ import android.widget.TextView;
 import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
-import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;
+import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;;
 
 
 public class QuizActivity extends AppCompatActivity {
@@ -34,7 +39,6 @@ public class QuizActivity extends AppCompatActivity {
     private TextView scoreText;
     private AnimalDatabase db;
     private boolean difficulty;
-    private AnimalAsyncTask repository;
     private TextView timer;
     public CountDownTimer timerObject = new CountDownTimer(10000, 1000) {
         @Override
@@ -62,32 +66,48 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        db = AnimalDatabase.getInstance(this);
-        difficulty = getIntent().getBooleanExtra("switch", true);
-        AnimalAsyncTask repository = new AnimalAsyncTask(db.animalDao());
+        new Thread(() -> {
 
-        image = findViewById(R.id.image);
-        btn1 = findViewById(R.id.alt0);
+            if(savedInstanceState!= null) {
+                score = savedInstanceState.getInt("score");
+                CharSequence btn1Text = savedInstanceState.getCharSequence("button1Text");
+                CharSequence btn2Text = savedInstanceState.getCharSequence("button2Text");
+                CharSequence btn3Text = savedInstanceState.getCharSequence("button3Text");
+                Log.d("VS", "create: "+score.toString());
+                scoreText.setText(String.valueOf(score));
 
-        btn2 = findViewById(R.id.alt1);
-        btn3 = findViewById(R.id.alt2);
+            } else {
+                Log.d("VS", "tom ");
+            }
 
-        btn4 = findViewById(R.id.next);
-        TextView scoreText = findViewById(R.id.textScore);
+            db = AnimalDatabase.getInstance(QuizActivity.this);
 
-        btn1.setOnClickListener(((v) -> {
-            guess(0);
-        }));
-        btn2.setOnClickListener((v) -> {
-            guess(1);
-        });
-        btn3.setOnClickListener((v) -> {
-            guess(2);
-        });
-        btn4.setOnClickListener((v) -> {
+            difficulty = getIntent().getBooleanExtra("switch", true);
+
+            image = findViewById(R.id.image);
+            btn1 = findViewById(R.id.alt0);
+
+            btn2 = findViewById(R.id.alt1);
+            btn3 = findViewById(R.id.alt2);
+
+            btn4 = findViewById(R.id.next);
+            TextView scoreText = findViewById(R.id.textScore);
+
+            btn1.setOnClickListener(((v) -> {
+                guess(0);
+            }));
+            btn2.setOnClickListener((v) -> {
+                guess(1);
+            });
+            btn3.setOnClickListener((v) -> {
+                guess(2);
+            });
+            btn4.setOnClickListener((v) -> {
+                newQuestion();
+            });
             newQuestion();
-        });
-        newQuestion();
+        }).start();
+
     }
 
     public void newQuestion() {
@@ -164,4 +184,25 @@ public class QuizActivity extends AppCompatActivity {
     public boolean isCorrect (int position) {
         return position == correctInt;
     }
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("score", score);
+        outState.putInt("attempts", attempts);
+
+        Drawable draw = image.getDrawable();
+        Bitmap bitmap = ((BitmapDrawable)draw).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] imageBytes = stream.toByteArray();
+
+        outState.putByteArray("image", imageBytes);
+        outState.putCharSequence("button1Text", btn1.getText());
+        outState.putCharSequence("button2Text", btn2.getText());
+        outState.putCharSequence("button3Text", btn3.getText());
+        Log.d("VS", "score: "+outState.getInt("score"));
+    }
+
 }

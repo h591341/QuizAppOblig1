@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QuizAppOblig1</string>
+    <string name="savedScore">savedScore</string>
 </resources>
