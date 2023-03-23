@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Random;
 
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,15 +19,14 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
 import com.example.quizappoblig1.ViewModels.AnimalAsyncTask;;
 
-
 public class QuizActivity extends AppCompatActivity {
-
     private ImageView image;
     private Random rnd = new Random();
     private Button btn1;
@@ -45,20 +45,17 @@ public class QuizActivity extends AppCompatActivity {
         public void onTick(long millisUntilFinished) {
             timer.setText(millisUntilFinished / 1000 + "s");
         }
-
         @Override
         public void onFinish()   {
             attempts++;
             showAnswers();
             updateScore();
-
             btn1.setEnabled(false);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
             btn4.setEnabled(true);
             timer.setText("Time is up!");
         }
-
     };
 
     @Override
@@ -66,37 +63,34 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        image = findViewById(R.id.image);
+        btn1 = findViewById(R.id.alt0);
+        btn2 = findViewById(R.id.alt1);
+        btn3 = findViewById(R.id.alt2);
+        scoreText = findViewById(R.id.textScore);
+
+        if(savedInstanceState!= null) {
+            score = savedInstanceState.getInt("score");
+            attempts = savedInstanceState.getInt("attempts");
+            CharSequence btn1Text = savedInstanceState.getCharSequence("button1Text");
+            CharSequence btn2Text = savedInstanceState.getCharSequence("button2Text");
+            CharSequence btn3Text = savedInstanceState.getCharSequence("button3Text");
+            byte[] imageBytes = savedInstanceState.getByteArray("image");
+
+            btn1.setText(btn1Text);
+            btn2.setText(btn2Text);
+            btn3.setText(btn3Text);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            image.setImageBitmap(bitmap);
+            scoreText.setText("Score: "+ score + "/" + attempts);
+
+        }
+
         new Thread(() -> {
-
-            if(savedInstanceState!= null) {
-                score = savedInstanceState.getInt("score");
-                CharSequence btn1Text = savedInstanceState.getCharSequence("button1Text");
-                CharSequence btn2Text = savedInstanceState.getCharSequence("button2Text");
-                CharSequence btn3Text = savedInstanceState.getCharSequence("button3Text");
-                byte[] imageBytes = savedInstanceState.getByteArray("image");
-                btn1.setText(btn1Text);
-                btn2.setText(btn2Text);
-                btn3.setText(btn3Text);
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                image.setImageBitmap(bitmap);
-
-                Log.d("VS", "create: "+score.toString());
-                scoreText.setText(String.valueOf(score));
-
-            } else {
-                Log.d("VS", "tom ");
-            }
 
             db = AnimalDatabase.getInstance(QuizActivity.this);
 
             difficulty = getIntent().getBooleanExtra("switch", true);
-
-            image = findViewById(R.id.image);
-            btn1 = findViewById(R.id.alt0);
-
-            btn2 = findViewById(R.id.alt1);
-            btn3 = findViewById(R.id.alt2);
 
             btn4 = findViewById(R.id.next);
             TextView scoreText = findViewById(R.id.textScore);
@@ -144,14 +138,10 @@ public class QuizActivity extends AppCompatActivity {
         async.execute();
     }
 
-
-
     public void guess(int index) {
-
         if (isCorrect(index)) {
             score++;
         }
-
         attempts++;
         showAnswers();
         updateScore();
@@ -160,11 +150,8 @@ public class QuizActivity extends AppCompatActivity {
         btn3.setEnabled(false);
         btn4.setEnabled(true);
         if(difficulty) { timerObject.cancel(); }
-
         timer = findViewById(R.id.timer);
-
     }
-
 
 
     private void updateScore() {
@@ -173,7 +160,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showAnswers() {
-
         if(correctInt == 0) {
             btn1.setBackgroundColor(getResources().getColor(R.color.green));
             btn2.setBackgroundColor(getResources().getColor(R.color.red));
@@ -192,7 +178,6 @@ public class QuizActivity extends AppCompatActivity {
     public boolean isCorrect (int position) {
         return position == correctInt;
     }
-
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -225,4 +210,15 @@ public class QuizActivity extends AppCompatActivity {
         return attempts;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
