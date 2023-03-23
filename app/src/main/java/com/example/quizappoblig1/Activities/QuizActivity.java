@@ -68,6 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.alt1);
         btn3 = findViewById(R.id.alt2);
         scoreText = findViewById(R.id.textScore);
+        timer = findViewById(R.id.timer);
 
         if(savedInstanceState!= null) {
             score = savedInstanceState.getInt("score");
@@ -113,6 +114,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void newQuestion() {
+
         AnimalAsyncTask async = new AnimalAsyncTask(db.animalDao()) {
             @Override
             protected void onPostExecute(List<Animal> liste) {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.MainMenuActivity">
+
+    <TextView
+        android:id="@+id/velkommen"
+        android:layout_width="191dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="10dp"
+        android:text="The"
+        android:textColor="#3C3C3C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.822"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/velkommen2"
+        android:layout_width="191dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="30dp"
+        android:text="Animal Quiz"
+        android:textColor="#3C3C3C"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quiz"
+        android:layout_width="334dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:text="Start Quiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addentry"
+        android:layout_width="334dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:text="Add a New Entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:checked="false"
+        android:gravity="center"
+        android:showText="true"
+        android:text="Easy Mode  /  Hard Mode"
+        android:textOff="Easy"
+        android:textOn="Hard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
