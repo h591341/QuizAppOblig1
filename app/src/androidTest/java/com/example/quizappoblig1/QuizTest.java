@@ -26,6 +26,10 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.quizappoblig1.Activities.AddEntryActivity;
+import com.example.quizappoblig1.Activities.MainMenuActivity;
+import com.example.quizappoblig1.Activities.QuizActivity;
+
 import org.junit.Assert;
 
 import org.junit.Rule;

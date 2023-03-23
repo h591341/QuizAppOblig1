@@ -33,9 +33,9 @@ public class QuizActivity extends AppCompatActivity {
     private Button btn2;
     private Button btn3;
     private Button btn4;
-    private Integer score = 0;
-    private Integer attempts = 0;
-    private int correctInt;
+    private static Integer score = 0;
+    private static Integer attempts = 0;
+    private static int correctInt;
     private TextView scoreText;
     private AnimalDatabase db;
     private boolean difficulty;
@@ -211,6 +211,18 @@ public class QuizActivity extends AppCompatActivity {
         outState.putCharSequence("button2Text", btn2.getText());
         outState.putCharSequence("button3Text", btn3.getText());
         Log.d("VS", "score: "+outState.getInt("score"));
+    }
+
+    public static int getCorrectButtonId() {
+        return correctInt;
+    }
+
+    public static int getCorrectScoreId() {
+        return score;
+    }
+
+    public static int getCorrectAttemptId() {
+        return attempts;
     }
 
 }

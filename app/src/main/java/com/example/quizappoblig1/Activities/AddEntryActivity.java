@@ -1,6 +1,7 @@
 package com.example.quizappoblig1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
@@ -18,14 +19,17 @@ import android.widget.ImageView;
 
 import com.example.quizappoblig1.Database.Animal;
 import com.example.quizappoblig1.Database.AnimalAdapter;
+import com.example.quizappoblig1.Database.AnimalDAO;
 import com.example.quizappoblig1.Database.AnimalDatabase;
 import com.example.quizappoblig1.R;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class AddEntryActivity extends AppCompatActivity {
 
     int select_picture = 200;
+    AnimalDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,5 +99,9 @@ public class AddEntryActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
+    }
+
+    public LiveData<List<Animal>> getInstance() {
+            return db.animalDao().getAnimalList();
     }
 }
