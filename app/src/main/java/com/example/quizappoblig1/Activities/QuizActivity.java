@@ -73,6 +73,14 @@ public class QuizActivity extends AppCompatActivity {
                 CharSequence btn1Text = savedInstanceState.getCharSequence("button1Text");
                 CharSequence btn2Text = savedInstanceState.getCharSequence("button2Text");
                 CharSequence btn3Text = savedInstanceState.getCharSequence("button3Text");
+                byte[] imageBytes = savedInstanceState.getByteArray("image");
+                btn1.setText(btn1Text);
+                btn2.setText(btn2Text);
+                btn3.setText(btn3Text);
+
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                image.setImageBitmap(bitmap);
+
                 Log.d("VS", "create: "+score.toString());
                 scoreText.setText(String.valueOf(score));
 

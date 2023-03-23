@@ -36,8 +36,6 @@ public abstract class AnimalDatabase extends RoomDatabase {
                         "animal_db")
                 .fallbackToDestructiveMigration()
                 .build();
-    }
-
         try {
             if(db.animalDao().find("Dinosaur") != null) {
                 Animal[] animals = populateData(context.getResources());
